@@ -25,5 +25,5 @@ def processFile(file_name: str, file_data: str, logger):
         f.write(file_data)
 
     logger.log('saved-files',
-       {'@timestamp': datetime.now(), 'filePath': file_name + '.encrypted', 'writer': MY_IP})
+       {'filePath': file_name + '.encrypted', 'writer': MY_IP})
     print(f'finished processing {file_name}')
