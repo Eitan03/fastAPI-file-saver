@@ -1,10 +1,9 @@
 import os
 
 
-class tempDir():
+class TempDir():
 	def __init__(self, dirName):
 		self.dirName = dirName
-		pass
 	
 	def __enter__(self):
 		print('entered')

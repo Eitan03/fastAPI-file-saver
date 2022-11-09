@@ -8,13 +8,13 @@ from encryption.encryptAES import encryptAES
 from encryption.getHashUsingSHA512 import getHashUsingSHA512
 from processFile import processFile
 from tests.Mocks.LoggerMock import createLoggerMock
-from tests.tempDir import tempDir
+from tests.TempDir import TempDir
 from config import AES_KEY_PATH, MY_IP
 
 class processFileTest(unittest.TestCase):
 	def test_processFile_adds_encryption_to_end_of_file(self):
 		dirName = './temp'
-		with tempDir(dirName):
+		with TempDir(dirName):
 			with open(AES_KEY_PATH, 'rb') as f: key = f.read()
 			
 			file_name = os.path.join(dirName, 'file')
@@ -34,7 +34,7 @@ class processFileTest(unittest.TestCase):
 		
 	def test_processFile_log(self):
 		dirName = './temp'
-		with tempDir(dirName):
+		with TempDir(dirName):
 			with open(AES_KEY_PATH, 'rb') as f: key = f.read()
 			
 			file_name = os.path.join(dirName, 'file')
