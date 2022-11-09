@@ -6,8 +6,8 @@ class LocalJSONLogger():
 	def	__init__(self):
 		pass
 
-	def	log(self, indexName: str, doc: dict):
-		doc['@timestamp'] = str(datetime.now()).replace(' ', 'T') + 'Z'
+	def	log(self, indexName: str, doc: dict, addTimeStamp=True):
+		if addTimeStamp: doc['@timestamp'] = str(datetime.now()).replace(' ', 'T') + 'Z'
 		folder = os.path.join('./elasticLogs',indexName)
 		if not os.path.exists(folder):
 			print(f'creating folder {folder}')
