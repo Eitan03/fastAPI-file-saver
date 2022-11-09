@@ -20,14 +20,14 @@ async def root():
     return {"message": "Hello from fastAPI1"}
 
 @app.post("/uploadfiles/", status_code=status.HTTP_201_CREATED, response_class=ORJSONResponse)
-async def create_upload_files(fileParts: List[bytes] = File(...), file_name: str = Form(...)):
+async def create_upload_files(fileParts: List[bytes] = File(...), fileName: str = Form(...)):
     try:
-        print(f' recived {file_name} with {len(fileParts)} parts')
+        print(f' recived {fileName} with {len(fileParts)} parts')
 
         if (len(fileParts) != AMOUNT_OF_FILE_PARTS):
             raise Exception("Invalid number of file parts where given!")
 
-        processFile(path.join(IMAGES_PATH, file_name), b''.join(fileParts), LocalJSONLogger(JSON_LOGS_PATH))
+        processFile(path.join(IMAGES_PATH, fileName), b''.join(fileParts), LocalJSONLogger(JSON_LOGS_PATH))
 
     except Exception as e:
 
