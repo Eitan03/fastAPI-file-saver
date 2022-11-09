@@ -45,9 +45,4 @@ class processFileTest(unittest.TestCase):
 
 			processFile(file_name, file_data, createLoggerMock({ 'log': logger }))
 
-			logger.assert_called_once()
-			saved_index, dictionary = logger.call_args.args
-			self.assertEqual('saved-files', saved_index)
-			self.assertIn('@timestamp', dictionary)
-			del dictionary['@timestamp']
-			self.assertDictEqual(dictionary, {'filePath': file_name + '.encrypted', 'writer': MY_IP})
+			logger.assert_called_once_with('saved-files', {'filePath': file_name + '.encrypted', 'writer': MY_IP})
