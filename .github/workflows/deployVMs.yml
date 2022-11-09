@@ -26,7 +26,7 @@ jobs:
         host: ${{ matrix.host }}
         username: eitan
         key: ${{ secrets.VM_SSH_KEY }}
-        script: git --git-dir ~/scripts/.git reset --hard HEAD && git --git-dir ~/scripts/.git pull
+        script: git --git-dir ~/scripts/.git reset --hard HEAD && git --git-dir ~/scripts/.git pull && git --git-dir ~/scripts/.git reset --hard
     
     - name: Restart Fast API
       uses: appleboy/ssh-action@master
