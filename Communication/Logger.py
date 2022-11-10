@@ -13,7 +13,7 @@ def initLogger():
 		, datefmt='%Y-%m-%dT%H:%M:%SZ'
 		) 
 
-	fh = TimedRotatingFileHandler('temp/test.json', when='H', interval=3, encoding='utf-8')
+	fh = TimedRotatingFileHandler('elasticLogs/errors/errors.json', when='H', interval=3, encoding='utf-8')
 	fh.setLevel(logging.WARNING)
 	fh.setFormatter(jsonFormatter)
 	log.addHandler(fh)
