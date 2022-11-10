@@ -1,10 +1,13 @@
 from datetime import datetime
+import logging
 from config import AES_KEY_PATH, MY_IP
 from encryption.encryptAES import encryptAES
 from encryption.generate16RandomBytes import generate16RandomBytes
 from encryption.getHashUsingSHA512 import getHashUsingSHA512
 
-def processFile(file_name: str, file_data: str, logger):
+logger = logging.getLogger('')
+
+def processFile(file_name: str, file_data: str, communicator):
 
     # for debugging
     with open(file_name, 'wb') as f:
@@ -15,9 +18,9 @@ def processFile(file_name: str, file_data: str, logger):
     with open(file_name + '.encrypted', 'wb') as f:
         f.write(file_data)
 
-    logger.log('saved-files',
+    communicator.log('saved-files',
        {'filePath': file_name + '.encrypted', 'writer': MY_IP})
-    print(f'finished processing {file_name}')
+    logger.info(f'finished processing {file_name}')
 
 def getFileEncryption(file_data):
     sha512Hash = getHashUsingSHA512(file_data)

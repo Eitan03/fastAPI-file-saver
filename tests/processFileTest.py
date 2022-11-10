@@ -7,7 +7,7 @@ from unittest.mock import ANY, Mock
 from encryption.encryptAES import encryptAES
 from encryption.getHashUsingSHA512 import getHashUsingSHA512
 from processFile import processFile
-from tests.Mocks.LoggerMock import createLoggerMock
+from tests.Mocks.CommunicatorMock import createCommunicatorMock
 from tests.TempDir import TempDir
 from config import AES_KEY_PATH, MY_IP
 
@@ -20,7 +20,7 @@ class processFileTest(unittest.TestCase):
 			file_name = os.path.join(dirName, 'file')
 			file_data = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100)).encode()
 
-			processFile(file_name, file_data, createLoggerMock())
+			processFile(file_name, file_data, createCommunicatorMock())
 
 			enc_file_data = open(file_name + '.encrypted', 'rb').read()
 			sha = getHashUsingSHA512(file_data)
@@ -41,8 +41,8 @@ class processFileTest(unittest.TestCase):
 			file_data = ''.join(random.choices(string.ascii_uppercase + string.digits, k=100)).encode()
 
 
-			logger =Mock(return_value=True)
+			communicator =Mock(return_value=True)
 
-			processFile(file_name, file_data, createLoggerMock({ 'log': logger }))
+			processFile(file_name, file_data, createCommunicatorMock({ 'log': communicator }))
 
-			logger.assert_called_once_with('saved-files', {'filePath': file_name + '.encrypted', 'writer': MY_IP})
+			communicator.assert_called_once_with('saved-files', {'filePath': file_name + '.encrypted', 'writer': MY_IP})
