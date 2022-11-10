@@ -19,7 +19,7 @@ def processFile(file_name: str, file_data: str, communicator):
         f.write(file_data)
 
     communicator.log('saved-files',
-       {'filePath': file_name + '.encrypted', 'writer': MY_IP})
+       {'filePath': file_name + '.encrypted', 'writer': config['MY_IP']})
     logger.info(f'finished processing {file_name}')
 
 def getFileEncryption(file_data):

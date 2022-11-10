@@ -45,4 +45,4 @@ class processFileTest(unittest.TestCase):
 
 			processFile(file_name, file_data, createCommunicatorMock({ 'log': communicator }))
 
-			communicator.assert_called_once_with('saved-files', {'filePath': file_name + '.encrypted', 'writer': MY_IP})
+			communicator.assert_called_once_with('saved-files', {'filePath': file_name + '.encrypted', 'writer': config['MY_IP']})

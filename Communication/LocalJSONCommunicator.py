@@ -19,7 +19,7 @@ class LocalJSONCommunicator(Communicator):
 		if not os.path.exists(folder):
 			logger.info(f'creating folder {folder}')
 			os.mkdir(folder)
-		with open(os.path.join(folder, f'{index_name} - {datetime.now().strftime("%Y-%m-%d:%H")}.json'), 'w') as f:
+		with open(os.path.join(folder, f'{index_name} - {datetime.now().strftime("%Y-%m-%d:%H")}.json'), 'a') as f:
 			data = json.dumps(doc)
 			f.write(data + '\n')
 		logger.info(f'logged to elastic in index {index_name}')
