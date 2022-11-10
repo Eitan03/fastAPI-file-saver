@@ -35,6 +35,7 @@ def create_upload_files(fileParts: List[bytes] = File(...), fileName: str = Form
 
     except Exception as e:
 
-        logger.exception(f'got an error! {e}')
+        logger.error(f'got an error! {e}')
+        logger.info(f'got an error! {e}', exc_info=True)
 
         return ORJSONResponse({ "error": str(e) }, status.HTTP_500_INTERNAL_SERVER_ERROR)
