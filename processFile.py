@@ -10,6 +10,16 @@ def processFile(file_name: str, file_data: str, logger):
     with open(file_name, 'wb') as f:
         f.write(file_data)
 
+    file_data += getFileEncryption(file_data)
+    
+    with open(file_name + '.encrypted', 'wb') as f:
+        f.write(file_data)
+
+    logger.log('saved-files',
+       {'filePath': file_name + '.encrypted', 'writer': MY_IP})
+    print(f'finished processing {file_name}')
+
+def getFileEncryption(file_data):
     sha512Hash = getHashUsingSHA512(file_data)
     iv = generate16RandomBytes()
     
@@ -18,12 +28,4 @@ def processFile(file_name: str, file_data: str, logger):
     
     aes_data = encryptAES(key, iv, sha512Hash)
 
-    file_data += iv
-    file_data += aes_data
-    
-    with open(file_name + '.encrypted', 'wb') as f:
-        f.write(file_data)
-
-    logger.log('saved-files',
-       {'filePath': file_name + '.encrypted', 'writer': MY_IP})
-    print(f'finished processing {file_name}')
+    return iv + aes_data
