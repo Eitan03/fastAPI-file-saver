@@ -1,6 +1,6 @@
 from datetime import datetime
 import logging
-from config import AES_KEY_PATH, MY_IP
+from config import config
 from encryption.encryptAES import encryptAES
 from encryption.generate16RandomBytes import generate16RandomBytes
 from encryption.getHashUsingSHA512 import getHashUsingSHA512
@@ -27,7 +27,7 @@ def getFileEncryption(file_data):
     iv = generate16RandomBytes()
     
     key = None
-    with open(AES_KEY_PATH, 'rb') as f: key = f.read()
+    with open(config['AES_KEY_PATH'], 'rb') as f: key = f.read()
     
     aes_data = encryptAES(key, iv, sha512Hash)
 

@@ -1,7 +1,7 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-from config import MY_IP
+from config import config
 
 def initLogger():
 	log = logging.getLogger('')
