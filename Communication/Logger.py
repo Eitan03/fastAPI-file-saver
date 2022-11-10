@@ -21,6 +21,6 @@ def initLogger():
 
 	consoleFormatter = logging.Formatter('[%(levelname)s] - %(message)s')
 	ch = logging.StreamHandler()
-	ch.setLevel(logging.DEBUG)
+	ch.setLevel(logging.INFO)
 	ch.setFormatter(consoleFormatter)
 	log.addHandler(ch)
